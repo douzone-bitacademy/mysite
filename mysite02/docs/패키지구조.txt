@@ -1,0 +1,55 @@
+com.douzone.mysite.controller
+	|-- MainController
+	|-- GuestbookController
+	|-- UserController
+
+com.douzone.mysite.action.main
+	|-- MainActionFactory
+	|-- MainAction
+
+com.douzone.mysite.action.user
+	|-- UserActionFactory
+	|-- JoinFormAction
+	|-- JoinAction 
+
+com.douzone.mysite.action.guestbook
+	|-- GuestActionFactory
+	|-- ListAction
+	|-- AddAction 
+	|-- DeleteFormAction 
+	|-- DeleteAction 
+
+com.douzone.mysite.repository
+	|-- GuestbookRepository
+	|-- 
+com.douzone.mysite.vo
+	|-- GuestbookVo
+	|-- 
+
+
+=============================================
+
+com.douzone.web.action
+	|-- Action
+	|-- ActionFactory
+com.douzone.web.util
+	|-- WebUtil
+com.douzone.web.listener
+	|-- ContextLoadListener
+com.douzone.web.filter
+	|-- com.douzone.web.filter
+	
+	
+
+context (문맥, 어떤 정보를 가지고 있는 컨테이너)
+context = Application
+애플리케이션에 대한 정보, 컨테이너(Tomcat)의 클래스(Servlet)들이 어플리케이션이 어떻게 실행되어야 하는가에 대한 정보
+
+tomcat에서 context: 웹 애플리케이션은 서블릿들이 구성하고 있다.
+spring에서 context: 비즈니스 클래스(Controller, Service, Repository) 
+
+	
+
+
+
+
