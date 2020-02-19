@@ -45,6 +45,7 @@
 				<div class="bottom">
 					<a href="">글목록</a>
 					<a href="">글수정</a>
+					<a href="">답글</a>
 				</div>
 			</div>
 		</div>
