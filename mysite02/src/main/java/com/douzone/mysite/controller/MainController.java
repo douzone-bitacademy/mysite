@@ -22,6 +22,7 @@ public class MainController extends HttpServlet {
 		String configPath = getServletConfig().getInitParameter("config");
 		System.out.println("init() called!!!!!!! : " + configPath);
 
+		
 		super.init();
 	}
 	
@@ -32,6 +33,7 @@ public class MainController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		System.out.println("doGet() called");
 		
 		String actionName = request.getParameter("a");
