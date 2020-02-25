@@ -54,18 +54,7 @@ public class UserRepository {
 		return count;
 	}
 	
-	private Connection getConnection() throws SQLException {
-		Connection conn = null;
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mysql://192.168.1.100:3307/webdb";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch( ClassNotFoundException e ) {
-			System.out.println( "드러이버 로딩 실패:" + e );
-		} 
-		
-		return conn;
-	}
+
 
 	public UserVo findByEmailAndPassword(UserVo vo) {
 		UserVo userVo = null;
@@ -117,4 +106,65 @@ public class UserRepository {
 		
 		return userVo;
 	}
+
+	public UserVo find(Long no) {
+		UserVo userVo = null;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+
+			String sql =
+				"select no, name, email, gender" +
+				"  from user" + 
+				" where no = ?";
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setLong(1, no);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				userVo = new UserVo();
+				userVo.setNo(rs.getLong(1));
+				userVo.setName(rs.getString(2));
+				userVo.setEmail(rs.getString(3));
+				userVo.setGender(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			System.out.println("error :" + e);
+		} finally {
+			// 자원 정리
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		
+		return userVo;
+	}
+	
+	private Connection getConnection() throws SQLException {
+		Connection conn = null;
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			String url = "jdbc:mysql://192.168.1.100:3307/webdb";
+			conn = DriverManager.getConnection(url, "webdb", "webdb");
+		} catch( ClassNotFoundException e ) {
+			System.out.println( "드러이버 로딩 실패:" + e );
+		} 
+		
+		return conn;
+	}	
 }
