@@ -20,5 +20,22 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />			
 	</context:component-scan>
 
-
+	<!-- Connection Pool DataSource-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.1.100:3307/webdb" />
+		<property name="username" value="webdb" />
+		<property name="password" value="webdb" />
+	</bean>
+	
+	<!-- MyBatis SqlSessionFactoryBean --> 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+		<property name="dataSource" ref="dataSource" /> 
+		<property name="configLocation" value="classpath:mybatis/configuration.xml" /> 
+	</bean>
+	
+	<!-- MyBatis SqlSessionTemplate --> 
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
 </beans>
