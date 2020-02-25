@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
+import com.douzone.mysite.exception.UserRepositoryException;
 import com.douzone.mysite.vo.UserVo;
 
 @Repository
@@ -23,7 +24,7 @@ public class UserRepository {
 			conn = getConnection();
 
 			String sql = 
-				" insert" + 
+				" inser" + 
 				"   into user" + 
 				" values (null, ?, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
@@ -36,7 +37,7 @@ public class UserRepository {
 			count = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("error :" + e);
+			throw new UserRepositoryException("error :" + e);
 		} finally {
 			// 자원 정리
 			try {
@@ -86,7 +87,7 @@ public class UserRepository {
 				userVo.setName(name);
 			}
 		} catch (SQLException e) {
-			System.out.println("error :" + e);
+			throw new UserRepositoryException("error :" + e);
 		} finally {
 			// 자원 정리
 			try {
@@ -134,7 +135,7 @@ public class UserRepository {
 				userVo.setGender(rs.getString(4));
 			}
 		} catch (SQLException e) {
-			System.out.println("error :" + e);
+			throw new UserRepositoryException("error :" + e);
 		} finally {
 			// 자원 정리
 			try {
@@ -162,7 +163,7 @@ public class UserRepository {
 			String url = "jdbc:mysql://192.168.1.100:3307/webdb";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 		} catch( ClassNotFoundException e ) {
-			System.out.println( "드러이버 로딩 실패:" + e );
+			throw new UserRepositoryException("드러이버 로딩 실패:" + e);
 		} 
 		
 		return conn;

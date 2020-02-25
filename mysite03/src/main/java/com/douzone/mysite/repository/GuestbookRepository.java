@@ -9,10 +9,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.douzone.mysite.exception.GuestbookRepositoryException;
 import com.douzone.mysite.vo.GuestbookVo;
 
 
 public class GuestbookRepository {
+	
 	public int delete( GuestbookVo vo ) {
 		int count = 0;
 		Connection conn = null;
@@ -33,7 +35,7 @@ public class GuestbookRepository {
 
 			count = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("error :" + e);
+			throw new GuestbookRepositoryException(e.getMessage());
 		} finally {
 			// 자원 정리
 			try {
@@ -72,7 +74,7 @@ public class GuestbookRepository {
 			count = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("error :" + e);
+			throw new GuestbookRepositoryException(e.getMessage());
 		} finally {
 			// 자원 정리
 			try {
@@ -105,7 +107,7 @@ public class GuestbookRepository {
 
 			// SQL문 실행
 			String sql =
-				"   select no," + 
+				"   selec no," + 
 				"          name," + 
 				"	       contents," + 
 				"     	   date_format(reg_date, '%Y-%m-%d %h:%i:%s')" + 
@@ -129,7 +131,7 @@ public class GuestbookRepository {
 				list.add(vo);
 			}
 		} catch (SQLException e) {
-			System.out.println("error :" + e);
+			throw new GuestbookRepositoryException(e.getMessage());
 		} finally {
 			// 자원 정리
 			try {
@@ -160,7 +162,7 @@ public class GuestbookRepository {
 			String url="jdbc:mysql://localhost/webdb";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 		} catch( ClassNotFoundException e ) {
-			System.out.println( "드러이버 로딩 실패:" + e );
+			throw new GuestbookRepositoryException("드러이버 로딩 실패:" + e);
 		} 
 		
 		return conn;
