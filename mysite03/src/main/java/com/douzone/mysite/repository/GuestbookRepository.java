@@ -107,7 +107,7 @@ public class GuestbookRepository {
 
 			// SQL문 실행
 			String sql =
-				"   selec no," + 
+				"   select no," + 
 				"          name," + 
 				"	       contents," + 
 				"     	   date_format(reg_date, '%Y-%m-%d %h:%i:%s')" + 
