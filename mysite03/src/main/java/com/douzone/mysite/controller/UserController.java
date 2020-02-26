@@ -59,7 +59,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		////////////////////////접근제어////////////////////////
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser != null) {
+		if(authUser == null) {
 			return "redirect:/";
 		}
 		///////////////////////////////////////////////////////////
@@ -93,6 +93,8 @@ public class UserController {
 			return "redirect:/";
 		}
 		///////////////////////////////////////////////////////////
+		userVo.setNo(authUser.getNo());
+		userService.updateUser(userVo);
 		
 		return "redirect:/user/update";
 	}
