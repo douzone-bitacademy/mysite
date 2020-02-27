@@ -47,8 +47,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		
+		
+		
 		//6. role 가져오기
-		Auth.Role role = auth.role();
+		String role = auth.value();
 		System.out.println("role:" + role);
 		
 		// 인증확인 되었으므로 핸들러 메소드 실행
