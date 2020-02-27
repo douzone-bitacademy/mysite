@@ -19,10 +19,20 @@
 	
 	<!-- Interceptors -->
 	<mvc:interceptors>
+		<!--
 		<mvc:interceptor>
 			<mvc:mapping path="/board/**" />
 			<bean class="com.douzone.mysite.interceptor.MyInterceptor02" />
 		</mvc:interceptor>
+		-->
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth"/>
+			<bean class="com.douzone.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout"/>
+			<bean class="com.douzone.security.LogoutInterceptor" />
+		</mvc:interceptor>		
 	</mvc:interceptors>
 	
 	
