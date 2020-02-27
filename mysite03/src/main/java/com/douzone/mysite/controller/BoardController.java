@@ -98,8 +98,20 @@ public class BoardController {
 				"&kwd=" + WebUtil.encodeURL( keyword, "UTF-8" );
 	}
 	
+//	@Auth
+//	@RequestMapping( value="/write", method=RequestMethod.GET )	
+//	public String write() {
+//		return "board/write";
+//	}
+
 	@RequestMapping( value="/write", method=RequestMethod.GET )	
 	public String write(HttpSession session) {
+		/////////////////////////////접근제어////////////////////////
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		///////////////////////////////////////////////////////////		
 		return "board/write";
 	}
 
@@ -117,15 +129,9 @@ public class BoardController {
 		///////////////////////////////////////////////////////////
 		
 		boardVo.setUserNo( authUser.getNo() );
-		
-		if( boardVo.getGroupNo() != null ) {
-			boardService.increaseGroupOrderNo( boardVo );
-		}
 		boardService.addContents( boardVo );
 		
-		return	( boardVo.getGroupNo() != null ) ?
-				"redirect:/board?p=" + page + "&kwd=" + WebUtil.encodeURL( keyword, "UTF-8" ) :
-				"redirect:/board";
+		return	"redirect:/board?p=" + page + "&kwd=" + WebUtil.encodeURL( keyword, "UTF-8" );
 	}
 
 	@RequestMapping( value="/reply/{no}" )	

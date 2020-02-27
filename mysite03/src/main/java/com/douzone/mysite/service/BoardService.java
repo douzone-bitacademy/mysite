@@ -12,13 +12,16 @@ import com.douzone.mysite.vo.BoardVo;
 
 @Service
 public class BoardService {
-	private static final int LIST_SIZE = 3; //리스팅되는 게시물의 수
-	private static final int PAGE_SIZE = 3; //페이지 리스트의 페이지 수
+	private static final int LIST_SIZE = 5; //리스팅되는 게시물의 수
+	private static final int PAGE_SIZE = 5; //페이지 리스트의 페이지 수
 	
 	@Autowired
 	private BoardRepository boardDao;
 	
 	public boolean addContents( BoardVo boardVo ) {
+		if( boardVo.getGroupNo() != null ) {
+			increaseGroupOrderNo( boardVo );
+		}
 		return boardDao.insert( boardVo ) == 1;
 	}
 	
