@@ -8,6 +8,10 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Auth {
-	String value() default "user";
+	public enum Role {USER, ADMIN}
+	
+	public Role role() default Role.USER;
+
+	String value() default "";
 	boolean test() default false;
 }
