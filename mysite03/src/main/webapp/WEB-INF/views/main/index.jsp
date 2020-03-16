@@ -15,7 +15,7 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" src="${pageContext.request.contextPath }/assets/images/kickscar.jpg" style="width:200px">
+					<img id="profile" src="${pageContext.request.contextPath }/images/202021635218939.jpg" style="width:200px">
 					<h2>안녕하세요. 안대혁의  mysite에 오신 것을 환영합니다.</h2>
 					<p>
 						이 사이트는  웹 프로그램밍 실습과제 예제 사이트입니다.<br>

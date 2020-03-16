@@ -46,6 +46,8 @@
 		</mvc:interceptor>		
 	</mvc:interceptors>
 	
+	<!-- mvc resources -->
+	<mvc:resources location="file:/mysite-uploads/" mapping="/images/**" />
 	
 	<!-- ViewResolver 설정 --> 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
