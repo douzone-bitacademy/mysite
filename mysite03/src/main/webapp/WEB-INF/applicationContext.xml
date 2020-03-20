@@ -18,7 +18,7 @@
 
 	<context:annotation-config />
 
-	<context:component-scan base-package="com.douzone.mysite.service, com.douzone.mysite.repository">
+	<context:component-scan base-package="com.douzone.mysite.service, com.douzone.mysite.repository, com.douzone.mysite.aspect">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />			
