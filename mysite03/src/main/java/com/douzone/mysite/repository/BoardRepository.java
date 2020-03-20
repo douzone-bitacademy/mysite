@@ -17,7 +17,9 @@ public class BoardRepository {
 	private SqlSession sqlSession;
 	
 	public int insert( BoardVo boardVo ) {
+		
 		return sqlSession.insert( "board.insert", boardVo );
+		
 	}
 	
 	public List<BoardVo> findAllByPageAndKeword( String keyword, Integer page, Integer size ) {
@@ -31,10 +33,13 @@ public class BoardRepository {
 	}
 
 	public int update( BoardVo boardVo ) {
+		
 		return sqlSession.update( "board.update", boardVo );
+		
 	}
 	
 	public int delete( Long no, Long userNo ) {
+		
 		Map<String, Long> map = new HashMap<String, Long>();
 		map.put( "no", no );
 		map.put( "userNo", userNo );
