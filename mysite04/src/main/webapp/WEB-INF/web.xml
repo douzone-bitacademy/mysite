@@ -15,7 +15,7 @@
 	</context-param> 
 
 	<listener>
-	    <listener-class> org.springframework.web.context.ContextLoaderListener </listener-class>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener </listener-class>
 	</listener>
 	
 	<filter>
@@ -40,6 +40,14 @@
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>com.douzone.mysite.config.WebConfig</param-value>
+		</init-param>
 	</servlet>
   
 	<servlet-mapping>
