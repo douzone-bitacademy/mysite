@@ -10,23 +10,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@Configuration
-@PropertySource("classpath:com/douzone/mysite/config/web/properties/fileupload.properties")
+//@Configuration
+//@PropertySource("classpath:com/douzone/mysite/config/web/properties/fileupload.properties")
 public class FileUploadConfig extends WebMvcConfigurerAdapter {
 	
 	@Autowired
 	private Environment env;
-	
-	//Multipart Resolver
-	@Bean
-	public MultipartResolver multipartResolver() {
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setMaxUploadSize(env.getProperty("fileupload.maxUploadSize", Long.class));
-		multipartResolver.setMaxInMemorySize(env.getProperty("fileupload.maxInMemorySize", Integer.class));
-		multipartResolver.setDefaultEncoding(env.getProperty("fileupload.defaultEncoding"));
-		
-		return multipartResolver;
-	}
 	
 	// Mvc Resources(URL Magic Mapping)
 	@Override
