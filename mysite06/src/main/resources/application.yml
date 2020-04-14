@@ -7,6 +7,7 @@ spring:
 ---
 # common spring configuration
 spring:
+
    # mvc
    mvc:
       view:
@@ -28,7 +29,7 @@ spring:
       basename: messages/messages_ko
       encoding: UTF-8
 
-   #multipart
+   # multipart
    servlet:
       multipart:
          enabled: true
@@ -78,10 +79,10 @@ server:
    servlet:
       context-path: /mysite06
 
-#mybatis
+# mybatis
 mybatis:
    config-location: classpath:mybatis/configuration.xml
 
-#logging
+# logging
 logging:
    config: classpath:logback.xml
