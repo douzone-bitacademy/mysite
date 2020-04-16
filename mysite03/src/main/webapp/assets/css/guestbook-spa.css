@@ -85,21 +85,19 @@
 	outline:none;
 }
 
-#guestbook.delete-form	{ height:200px }
-#guestbook.delete-form form {
-	width:300px;
+#dialog-delete-form.delete-form	{ height:200px }
+#dialog-delete-form.delete-form form {
+	width:200px;
 	padding:10px;
 	border:1px solid #666;
-	border-radius: 10px;
-	margin:50px auto;
+	border-radius: 5px;
+	margin:10px auto;
 }
 
-#guestbook.delete-form a	{ display:block; margin:20px auto; width:110px }
-#guestbook.delete-form input[type="password"] {
+#dialog-delete-form.delete-form a	{ display:block; margin:20px auto; width:110px }
+#dialog-delete-form.delete-form input[type="password"] {
 	margin-top:5px;
-	width:284px;
+	width:180px;
 }
-#guestbook.delete-form input[type="submit"] {
-	width:296px;
-}		
-#guestbook.delete-message p	{ padding:100px; height:50px; text-align:center }
+		
+#dialog-delete-form p.validateTips.error { padding:10px 0 0 0; color: #f00 }

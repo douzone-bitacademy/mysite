@@ -14,6 +14,21 @@
 <script>
 var startNo = 0;
 var isEnd = false;
+var messageBox = function(title, message, callback){
+	$("#dialog-message p").text(message);
+	$("#dialog-message")
+		.attr("title", title)
+		.dialog({
+			modal: true,
+			buttons: {
+				"확인": function() {
+					$(this).dialog( "close" );
+		        }
+			},
+			close: callback
+		});
+}
+
 var render = function(vo, mode){
 	var html = 
 		"<li data-no='" + vo.no + "'>" + 
@@ -68,6 +83,25 @@ var fetchList = function(){
 }
 
 $(function(){
+	// 삭제 다이알로 객체 만들기
+	var dialogDelete = $("#dialog-delete-form").dialog({
+		autoOpen: false,
+		width: 300,
+		height: 220,
+		modal: true,
+		buttons: {
+			"삭제": function(){
+				console.log("삭제!!!");
+			},
+			"취소": function(){
+				$(this).dialog('close');
+			}
+		},
+		close: function(){
+			console.log("close");
+		}
+	});
+	
 	// 가져오기 버튼 Click 이벤트
 	$('.btn-fetch').click(fetchList);
 	
@@ -77,8 +111,28 @@ $(function(){
 		
 		var vo = {};
 		vo.name = $("#input-name").val();
+		if(vo.name == ''){
+			messageBox("방명록 글 남기기", "이름은 필수 항목 입니다.", function(){
+				$("#input-name").focus();
+			});
+			return;	
+		}
+		
 		vo.password = $("#input-password").val();
+		if(vo.password == ''){
+			messageBox("방명록 글 남기기", "비밀번호는 필수 항목 입니다.", function(){
+				$("#input-password").focus();
+			});
+			return;	
+		}
+	
 		vo.contents = $("#tx-content").val();
+		if(vo.contents == ''){
+			messageBox("방명록 글 남기기", "내용은 필수 항목 입니다.", function(){
+				$("#tx-content").focus();
+			});
+			return;	
+		}
 		
 		$.ajax({
 			url: '${pageContext.request.contextPath }/api/guestbook/add',
@@ -117,6 +171,17 @@ $(function(){
 		}
 	});
 	
+	// Live Event: 존재하지 않는 element의 이벤트 핸들러를 미리 세팅하는 것
+	// delegation(위임, document)
+	$(document).on('click', '#list-guestbook li a', function(event){
+		event.preventDefault();
+		
+		var no = $(this).data('no');
+		console.log("clicked:" + no);
+		
+		dialogDelete.dialog("open");
+	});
+	
 	// 처음 리스트 가져오기
 	fetchList();
 });
@@ -147,13 +212,12 @@ $(function(){
 				</div>
 				
 			</div>
-			<div id="dialog-delete-form" title="메세지 삭제" style="display:none">
+			<div id="dialog-delete-form" class="delete-form" title="메세지 삭제" style="display:none">
   				<p class="validateTips normal">작성시 입력했던 비밀번호를 입력하세요.</p>
-  				<p class="validateTips error" style="display:none">비밀번호가 틀립니다.</p>
+  				<p class="validateTips error" style="display:none;">비밀번호가 틀립니다.</p>
   				<form>
  					<input type="password" id="password-delete" value="" class="text ui-widget-content ui-corner-all">
 					<input type="hidden" id="hidden-no" value="">
-					<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
   				</form>
 			</div>
 			<div id="dialog-message" title="" style="display:none">
