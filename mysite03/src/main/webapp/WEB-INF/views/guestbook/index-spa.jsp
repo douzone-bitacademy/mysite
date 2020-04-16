@@ -15,12 +15,22 @@
 /* jquery plugin */
 (function($){
 	$.fn.hello = function(){
-		console.log("!!!!!!");
-		this.css("background-color", "#f00");
-		console.log("!!!!!!");
-		return this;
+		console.log(this.length);
+		console.log("hello #" + this.attr('title'));
 	}
 })(jQuery);
+
+(function($){
+	$.fn.flash = function(){
+		var $that = $(this);
+		var isBlink = false;
+		setInterval(function(){
+			$that.css("backgroundColor",  isBlink ? "#f00" : "#aaa");
+			isBlink = !isBlink;
+		}, 1000);
+	}
+})(jQuery);
+
 
 </script>
 
@@ -228,7 +238,8 @@ $(function(){
 	fetchList();
 	
 	// jquery plugin test
-	$("#btn-fetch").hello();
+	$(".btn-fetch").hello();
+	$(".btn-fetch").flash();
 });
 </script>
 </head>
