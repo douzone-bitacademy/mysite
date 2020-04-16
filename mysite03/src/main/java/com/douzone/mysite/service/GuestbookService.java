@@ -26,4 +26,8 @@ public class GuestbookService {
 		int count = guestbookRepository.insert(vo);
 		return count == 1;
 	}
+
+	public List<GuestbookVo> getMessageList(Long startNo) {
+		return guestbookRepository.findAll(startNo);
+	}
 }
