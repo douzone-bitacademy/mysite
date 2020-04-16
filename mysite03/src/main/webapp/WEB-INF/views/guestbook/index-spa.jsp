@@ -91,14 +91,43 @@ $(function(){
 		modal: true,
 		buttons: {
 			"삭제": function(){
-				console.log("삭제!!!");
+				var no = $("#hidden-no").val();
+				var password = $("#password-delete").val();
+				
+				$.ajax({
+					url: '${pageContext.request.contextPath }/api/guestbook/delete/' + no,
+					async: true,
+					type: 'delete',
+					dataType: 'json',
+					data: 'password=' + password,
+					success: function(response){
+						if(response.result != "success"){
+							console.error(response.message);
+							return;
+						}
+						
+						if(response.data != -1){
+							$("#list-guestbook li[data-no=" + response.data + "]").remove();
+							dialogDelete.dialog('close');
+							return;
+						}
+						
+						// 비밀번호가 틀린경우
+						$("#dialog-delete-form p.validateTips.error").show();
+					},
+					error: function(xhr, status, e){
+						console.error(status + ":" + e);
+					}
+				});
 			},
 			"취소": function(){
 				$(this).dialog('close');
 			}
 		},
 		close: function(){
-			console.log("close");
+			$("#hidden-no").val("");
+			$("#password-delete").val("");
+			$("#dialog-delete-form p.validateTips.error").hide();
 		}
 	});
 	
@@ -177,8 +206,7 @@ $(function(){
 		event.preventDefault();
 		
 		var no = $(this).data('no');
-		console.log("clicked:" + no);
-		
+		$("#hidden-no").val(no);		
 		dialogDelete.dialog("open");
 	});
 	
