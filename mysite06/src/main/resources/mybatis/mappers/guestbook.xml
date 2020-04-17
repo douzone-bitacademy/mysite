@@ -12,25 +12,25 @@
 	  	order by reg_date desc
 	  	]]>
 	</select>
-	
-	<select id="findAllByNo" resultType="guestbookvo" parameterType="long">
+
+	<select id="findAllByNo" parameterType="long" resultType="guestbookvo">
 		<![CDATA[			
-		  select no, 
-		         name, 
+		  select no,
+		         name,
 		         contents, 
 		         date_format(reg_date, '%Y-%m-%d') as regDate
 		    from guestbook
-		]]>    
+		]]>
 		<if test="_parameter > 0">
 			<![CDATA[
-			where no < #{_parameter}   
-			]]>    
+			  where no < #{_parameter }			
+			]]>
 		</if>
-		<![CDATA[   
+		<![CDATA[    
 	  	order by no desc
-	  	   limit 0, 5	
+	  	limit 0, 3
 	  	]]>
-	</select>	
+	</select>
 	
 	<insert id="insert" parameterType="guestbookvo">
 		<![CDATA[
